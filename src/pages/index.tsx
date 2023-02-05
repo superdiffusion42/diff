@@ -6,6 +6,11 @@ export default function Home() {
   const [img, setImg] = useState();
   const [prompt, setPrompt] = useState('');
 
+  const handleSD = async () => {
+    console.log(prompt);
+    
+  }
+  
 
   return (
     <>
@@ -27,15 +32,13 @@ export default function Home() {
           />
           <button 
             className='rounded-md w-1/3 bg-blue-600 py-3 hover:bg-blue-400'
-            onClick={() => {
-              alert("Your prompt: " + prompt)
-            }}
+            onClick={handleSD}
           >Abracadabra</button>
         </div>
 
         <div className={`flex justify-center w-full mt-16 py-16 border-2 border-white`}>
           <Image 
-            src={img ? img : '/vercel.svg'}
+            src={img ? img : '/webcolours-unknown.png'}
             alt='SD image'
             width={500}
             height={500}
