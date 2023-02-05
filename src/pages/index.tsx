@@ -4,6 +4,7 @@ import { useState } from 'react'
 
 export default function Home() {
   const [img, setImg] = useState();
+  const [prompt, setPrompt] = useState('');
 
 
   return (
@@ -18,10 +19,17 @@ export default function Home() {
         <h2 className="text-xl w-full text-center py-10">Super Diffusion</h2>
 
         <div className="flex flex-col gap-3 w-full">
-          <input className='h-12 rounded-md w-full px-4' placeholder='Enter your prompt' />
+          <input 
+            className='h-12 rounded-md w-full px-4' 
+            placeholder='Enter your prompt'
+            value={prompt}
+            onChange={(e) => setPrompt(e.target.value)}
+          />
           <button 
             className='rounded-md w-1/3 bg-blue-600 py-3 hover:bg-blue-400'
-            onClick={() => {alert("bientôt SD !")}}
+            onClick={() => {
+              alert("Your prompt: " + prompt)
+            }}
           >Abracadabra</button>
         </div>
 
