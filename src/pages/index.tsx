@@ -20,7 +20,7 @@ export default function Home() {
 
         <div className="flex flex-col gap-3 w-full">
           <input 
-            className='h-12 rounded-md w-full px-4' 
+            className='h-12 rounded-md w-full px-4 text-slate-800' 
             placeholder='Enter your prompt'
             value={prompt}
             onChange={(e) => setPrompt(e.target.value)}
