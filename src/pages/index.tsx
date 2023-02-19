@@ -1,16 +1,31 @@
 import Head from 'next/head'
 import Image from 'next/image';
 import { useState } from 'react'
+import { api } from '../utils/api'
 
 export default function Home() {
-  const [img, setImg] = useState();
-  const [prompt, setPrompt] = useState('');
+  const [img, setImg] = useState<string>();
+  const [prompt, setPrompt] = useState('Super mario bros flirting with Yoshi');
 
-  const handleSD = async () => {
-    console.log(prompt);
-    
-  }
-  
+  const [inProgress, setInProgress] = useState<boolean>(false)
+
+  const resStart = api.start.useQuery(
+    { text: prompt }, 
+    { enabled: inProgress }
+  );
+  const resCheck = api.check.useQuery(
+    { callID: resStart.data?.callID! },
+    { 
+      enabled: !!resStart.data?.callID && inProgress, 
+      refetchInterval: 5000,
+      onSuccess: (r) => {
+        if (r?.modelOutputs && r?.modelOutputs.length > 0) {
+          setImg("data:image/jpg;base64," + r.modelOutputs[0]?.image_base64);
+          setInProgress(false);
+        }
+      }
+    },
+  );
 
   return (
     <>
@@ -20,6 +35,7 @@ export default function Home() {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
+
       <main className="flex flex-col gap-4 h-[100vh] w-full bg-slate-800 text-white px-[15%] py-8">
         <h2 className="text-xl w-full text-center py-10">Super Diffusion</h2>
 
@@ -32,7 +48,7 @@ export default function Home() {
           />
           <button 
             className='rounded-md w-1/3 bg-blue-600 py-3 hover:bg-blue-400'
-            onClick={handleSD}
+            onClick={() => setInProgress(true)}
           >Abracadabra</button>
         </div>
 
