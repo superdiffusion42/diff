@@ -36,7 +36,7 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <main className="flex flex-col gap-4 h-[100vh] w-full bg-slate-800 text-white px-[15%] py-8">
+      <main className="flex flex-col gap-4 min-h-[100vh] w-full bg-slate-800 text-white px-[15%] py-8">
         <h2 className="text-xl w-full text-center py-10">Super Diffusion</h2>
 
         <div className="flex flex-col gap-3 w-full">
