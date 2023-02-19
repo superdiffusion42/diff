@@ -53,12 +53,17 @@ export default function Home() {
         </div>
 
         <div className={`flex justify-center w-full mt-16 py-16 border-2 border-white`}>
-          <Image 
-            src={img ? img : '/webcolours-unknown.png'}
-            alt='SD image'
-            width={500}
-            height={500}
-          />
+          <div className={inProgress ? '' : 'hidden'}>
+            "Generating image....."
+          </div>
+          <div className={inProgress ? 'hidden' : ''}>
+            <Image 
+              src={img ? img : '/webcolours-unknown.png'}
+              alt='SD image'
+              width={500}
+              height={500}
+            />
+          </div>
         </div>
 
       </main>
